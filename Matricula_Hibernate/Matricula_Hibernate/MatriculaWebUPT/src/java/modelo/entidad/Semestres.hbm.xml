@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2 may. 2023 17:52:23 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.entidad.Semestres" table="semestres" catalog="sistema_matricula" optimistic-lock="version">
+        <id name="idSemestre" type="java.lang.Integer">
+            <column name="id_semestre" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="50" />
+        </property>
+        <property name="fechaInicio" type="date">
+            <column name="fecha_inicio" length="10" />
+        </property>
+        <property name="fechaFin" type="date">
+            <column name="fecha_fin" length="10" />
+        </property>
+        <set name="seccioneses" table="secciones" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fkid_semestre" />
+            </key>
+            <one-to-many class="modelo.entidad.Secciones" />
+        </set>
+        <set name="matriculases" table="matriculas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_semestre" not-null="true" />
+            </key>
+            <one-to-many class="modelo.entidad.Matriculas" />
+        </set>
+    </class>
+</hibernate-mapping>

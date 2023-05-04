@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2 may. 2023 17:52:23 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.entidad.DetalleMatricula" table="detalle_matricula" catalog="sistema_matricula" optimistic-lock="version">
+        <id name="idDetalle" type="int">
+            <column name="id_detalle" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cursos" class="modelo.entidad.Cursos" fetch="select">
+            <column name="fkidcurso" />
+        </many-to-one>
+        <many-to-one name="matriculas" class="modelo.entidad.Matriculas" fetch="select">
+            <column name="fkidmatricula" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

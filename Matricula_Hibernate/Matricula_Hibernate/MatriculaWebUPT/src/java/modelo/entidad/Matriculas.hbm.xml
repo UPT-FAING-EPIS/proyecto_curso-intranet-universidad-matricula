@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2 may. 2023 17:52:23 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.entidad.Matriculas" table="matriculas" catalog="sistema_matricula" optimistic-lock="version">
+        <id name="idMatricula" type="java.lang.Integer">
+            <column name="id_matricula" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="estudiantes" class="modelo.entidad.Estudiantes" fetch="select">
+            <column name="id_estudiante" not-null="true" />
+        </many-to-one>
+        <many-to-one name="secciones" class="modelo.entidad.Secciones" fetch="select">
+            <column name="id_seccion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="semestres" class="modelo.entidad.Semestres" fetch="select">
+            <column name="id_semestre" not-null="true" />
+        </many-to-one>
+        <property name="estatus" type="string">
+            <column name="estatus" length="9" not-null="true" />
+        </property>
+        <property name="fechaMatricula" type="date">
+            <column name="fecha_matricula" length="10" not-null="true" />
+        </property>
+        <set name="pagoses" table="pagos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_matricula" not-null="true" />
+            </key>
+            <one-to-many class="modelo.entidad.Pagos" />
+        </set>
+        <set name="detalleMatriculas" table="detalle_matricula" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fkidmatricula" />
+            </key>
+            <one-to-many class="modelo.entidad.DetalleMatricula" />
+        </set>
+    </class>
+</hibernate-mapping>
