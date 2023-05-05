@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2 may. 2023 17:52:23 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.entidad.Cursos" table="cursos" catalog="sistema_matricula" optimistic-lock="version">
+        <id name="idCurso" type="java.lang.Integer">
+            <column name="id_curso" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="50" not-null="true" />
+        </property>
+        <property name="codigo" type="string">
+            <column name="codigo" length="10" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="65535" />
+        </property>
+        <property name="creditos" type="java.lang.Integer">
+            <column name="creditos" />
+        </property>
+        <set name="detalleMatriculas" table="detalle_matricula" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fkidcurso" />
+            </key>
+            <one-to-many class="modelo.entidad.DetalleMatricula" />
+        </set>
+        <set name="seccioneses" table="secciones" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fkid_curso" />
+            </key>
+            <one-to-many class="modelo.entidad.Secciones" />
+        </set>
+    </class>
+</hibernate-mapping>
